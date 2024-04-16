@@ -1,12 +1,25 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "description": "",
+  "description": "api desenvolvida para alimentar o projeto Food Explorer, desafio final do programa Explorer da  @rocketseat",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./src/server.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Gabriel Beli",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "knex": "^3.1.0",
+    "multer": "^1.4.5-lts.1",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
 }
