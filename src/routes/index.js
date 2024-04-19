@@ -5,6 +5,7 @@ const dishesRouter = require("./dishes.routes");
 const favoritesRouter = require("./favorites.routes");
 const resquestsRouter = require('./requests.routes');
 const purchasesRouter = require('./purchases.routes');
+const sessionsRouter = require('./sessions.routes');
 
 const router = Router();
 router.use("/users", usersRouter);
@@ -12,6 +13,7 @@ router.use('/dishes', dishesRouter);
 router.use('/favorites', favoritesRouter);
 router.use('/requests', resquestsRouter);
 router.use('/purchases', purchasesRouter);
+router.use('/sessions', sessionsRouter);
 
 router.get('/', (request, response) =>
   response.send(`<h1>Welcome API FoodExplorer</h1>`));
