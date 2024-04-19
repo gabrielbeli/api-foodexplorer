@@ -4,9 +4,9 @@
   "description": "api desenvolvida para alimentar o projeto Food Explorer, desafio final do programa Explorer da  @rocketseat",
   "main": "index.js",
   "scripts": {
-    "start": "npm run migrate && node ./src/server.js",
+    "start": "node ./src/server.js",
     "dev": "nodemon ./src/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "migrate": "knex migrate:latest"
   },
   "keywords": [],
   "author": "Gabriel Beli",
