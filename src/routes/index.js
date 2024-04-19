@@ -1,8 +1,13 @@
-const { Router } = require("express");
+const { Router, request, response } = require("express");
 
 const usersRouter = require("./users.routes");
+const dishesRouter = require("./dishes.routes");
 
-const routes = Router();
-routes.use("/users", usersRouter);
+const router = Router();
+router.use("/users", usersRouter);
+router.use('/dishes', dishesRouter);
 
-module.exports = routes;
+router.get('/', (request, response) =>
+  response.send(`<h1>Welcome API FoodExplorer</h1>`));
+
+module.exports = router;

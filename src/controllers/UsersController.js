@@ -1,6 +1,6 @@
 const { hash } = require("bcryptjs");
 const AppError = require("../utils/AppError");
-const knex = rquire("../database/knex");
+const knex = require("../database/knex");
 
 const UserRepository = require("../repositories/UserRepository");
 const UserCreateServices = require("../services/UserCreateServices");

@@ -1,6 +1,6 @@
 const knex = require('../database/knex');
 
-class DisheRepository {
+class DishRepository {
   async createDish({ name, category, price, description }) {
     const [id] = await knex('dishes').insert({
       name,
@@ -58,4 +58,4 @@ class DisheRepository {
   }
 }
 
-module.exports = DisheRepository;
+module.exports = DishRepository;
