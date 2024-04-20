@@ -10,9 +10,9 @@ class DishPhotoController {
     const photoFilename = request.file.filename;
 
     const diskStorage = new DiskStorage();
-    const dishesRepository = new DishesRepository();
+    const dishRepository = new DishRepository();
 
-    const dish = await dishesRepository.findById(dish_id);
+    const dish = await dishRepository.findById(dish_id);
 
     if (!dish) {
       throw new AppError('Prato não encontrado', 404);
@@ -26,7 +26,7 @@ class DishPhotoController {
 
     dish.photo = filename;
 
-    await dishesRepository.updateDish(dish)
+    await dishRepository.updateDish(dish)
 
     return response.json(dish);
   }
