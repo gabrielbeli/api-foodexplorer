@@ -13,7 +13,7 @@ class UsersController {
 
     await userCreateServices.execute({ name, email, password, isAdmin });
 
-    return response.json();
+    return response.status(201).json();
   }
  }
 
