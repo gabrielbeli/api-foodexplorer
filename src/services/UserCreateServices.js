@@ -2,8 +2,8 @@ const AppError = require("../utils/AppError");
 const { hash } = require("bcryptjs");
 
 class UserCreateServices {
-  constructor(userRepository) {
-    this.userRepository = userRepository;
+  constructor(usersRepository) {
+    this.usersRepository = usersRepository;
   }
 
   async execute({ name, email, password, isAdmin }) {
@@ -15,7 +15,7 @@ class UserCreateServices {
       throw new AppError('Senha deve conter no mínimo 6 digitos');
     }
 
-    const emailInUse = await this.userRepository.findByEmail(email);
+    const emailInUse = await this.usersRepository.findByEmail(email);
 
     if (emailInUse) {
       throw new AppError('Este e-mail já está sendo usado');
@@ -23,7 +23,7 @@ class UserCreateServices {
 
     const hashedPassword = await hash(password, 8);
 
-    await this.userRepository.create({
+    await this.usersRepository.create({
       name,
       email,
       password: hashedPassword,

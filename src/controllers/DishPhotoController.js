@@ -2,7 +2,7 @@ const AppError = require('../utils/AppError');
 
 const DiskStorage = require('../providers/DiskStorage');
 
-const DishRepository = require('../repositories/DishRepository');
+const DishesRepository = require('../repositories/DishesRepository');
 
 class DishPhotoController {
   async update(request, response) {
@@ -10,9 +10,9 @@ class DishPhotoController {
     const photoFilename = request.file.filename;
 
     const diskStorage = new DiskStorage();
-    const dishRepository = new DishRepository();
+    const dishesRepository = new DishesRepository();
 
-    const dish = await dishRepository.findById(dish_id);
+    const dish = await dishesRepository.findById(dish_id);
 
     if (!dish) {
       throw new AppError('Prato não encontrado', 404);
@@ -26,7 +26,7 @@ class DishPhotoController {
 
     dish.photo = filename;
 
-    await dishRepository.updateDish(dish)
+    await dishesRepository.updateDish(dish)
 
     return response.json(dish);
   }

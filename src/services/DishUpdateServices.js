@@ -1,10 +1,10 @@
 class DishUpdateServices {
-  constructor(dishRepository) {
-    this.dishRepository = dishRepository;
+  constructor(dishesRepository) {
+    this.dishesRepository = dishesRepository;
   }
 
   async execute({ id, name, category, price, description, ingredients }) {
-    const dish = await this.dishRepository.findById(id);
+    const dish = await this.dishesRepository.findById(id);
 
     if (!dish) {
       throw new AppError('Prato não encontrado');
@@ -19,13 +19,13 @@ class DishUpdateServices {
     dish.price = price ?? dish.price;
     dish.description = description ?? dish.description;
 
-    await this.dishRepository.updateDish(dish);
+    await this.dishesRepository.updateDish(dish);
 
     ingredients = ingredients ?? [];
 
     if (ingredients.length > 0) {
       
-      const oldIngredients = await this.dishRepository
+      const oldIngredients = await this.dishesRepository
         .getDishIngredients(id)
         .then((data) => data.map((ingredients) => ingredients.name));
 
@@ -33,7 +33,7 @@ class DishUpdateServices {
         (ingredient) => !ingredients.includes(ingredient)
       );
 
-      await this.dishRepository.removeDishIngredients({ dish_id: id, remove });
+      await this.dishesRepository.removeDishIngredients({ dish_id: id, remove });
 
       const newIngredients = ingredients
         .filter((ingredient) => !oldIngredients.includes(ingredient))
@@ -42,10 +42,10 @@ class DishUpdateServices {
           dish_id: id,
         }));
       if (newIngredients.length !== 0) {
-        await this.dishRepository.createDishIngredients(newIngredients);
+        await this.dishesRepository.createDishIngredients(newIngredients);
       }
     } else {
-      await this.dishRepository.removeAllDishIngredients(id);
+      await this.dishesRepository.removeAllDishIngredients(id);
     }
   }
 }

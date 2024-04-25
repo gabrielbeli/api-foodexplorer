@@ -1,6 +1,6 @@
 const knex = require('../database/knex');
 
-class UserRepository {
+class UsersRepository {
   async create({ name, email, password, isAdmin }) {
     await knex('users').insert({
       name,
@@ -17,4 +17,4 @@ class UserRepository {
   }
 }
 
-module.exports = UserRepository;
+module.exports = UsersRepository;

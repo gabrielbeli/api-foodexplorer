@@ -1,14 +1,14 @@
 const AppError = require('../utils/AppError');
 
-const DishRepository = require('../repositories/DishRepository');
+const DishesRepository = require('../repositories/DishesRepository');
 const DishCreateServices = require('../services/DishCreateServices');
 const DishUpdateServices = require('../services/DishUpdateServices');
 class DishesController {
   async create(request, response) {
     let { name, category, price, description, ingredients } = request.body;
 
-    const dishRepository = new DishRepository();
-    const dishCreateServices = new DishCreateServices(dishRepository);
+    const dishesRepository = new DishesRepository();
+    const dishCreateServices = new DishCreateServices(dishesRepository);
     const { dish_id } = await dishCreateServices.execute({
       name,
       category,
@@ -24,8 +24,8 @@ class DishesController {
     const { name, category, price, description, ingredients } = request.body;
     const { id } = request.params;
   
-    const dishRepository = new DishRepository();
-    const dishUpdateServices = new DishUpdateServices(dishRepository);
+    const dishesRepository = new DishesRepository();
+    const dishUpdateServices = new DishUpdateServices(dishesRepository);
   
     try {
       await dishUpdateServices.execute({
@@ -47,15 +47,15 @@ class DishesController {
   async show(request, response) {
     const { id } = request.params;
 
-    const dishRepository = new DishRepository();
+    const dishesRepository = new DishesRepository();
 
-    const dish = await dishRepository.findById(id);
+    const dish = await dishesRepository.findById(id);
 
     if (!dish) {
       throw new AppError('Prato não encontrado');
     }
 
-    const dishIngredients = await dishRepository.getDishIngredients(id);
+    const dishIngredients = await dishesRepository.getDishIngredients(id);
     
     return response.json({ ...dish, ingredients: dishIngredients});
   }
@@ -64,8 +64,8 @@ class DishesController {
 
     const { search } = request.query;
 
-    const dishRepository = new DishRepository();
-    const dishes = await dishRepository.findDishByNameOrIngredients(search);
+    const dishesRepository = new DishesRepository();
+    const dishes = await dishesRepository.findDishByNameOrIngredients(search);
 
     return response.json(dishes);
   }
@@ -73,8 +73,8 @@ class DishesController {
   async delete(request, response) {
     const { id } = request.params;
 
-    const dishRepository = new DishRepository();
-    await dishRepository.removeDish(id);
+    const dishesRepository = new DishesRepository();
+    await dishesRepository.removeDish(id);
 
     return response.json();
   }

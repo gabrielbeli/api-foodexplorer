@@ -2,14 +2,14 @@ const { hash } = require("bcryptjs");
 const AppError = require("../utils/AppError");
 const knex = require("../database/knex");
 
-const UserRepository = require("../repositories/UserRepository");
+const UsersRepository = require("../repositories/UsersRepository");
 const UserCreateServices = require("../services/UserCreateServices");
 class UsersController {
   async create(request, response) {
     const { name, email, password, isAdmin } = request.body;
 
-    const userRepository = new UserRepository();
-    const userCreateServices = new UserCreateServices(userRepository);
+    const usersRepository = new UsersRepository();
+    const userCreateServices = new UserCreateServices(usersRepository);
 
     await userCreateServices.execute({ name, email, password, isAdmin });
 

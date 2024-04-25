@@ -1,6 +1,6 @@
 const AppError = require('../utils/AppError');
-class DishCreateServices { constructor(dishRepository) {
-  this.dishRepository = dishRepository;
+class DishCreateServices { constructor(dishesRepository) {
+  this.dishesRepository = dishesRepository;
 }
 
 async execute({ name, category, price, description, ingredients }) {
@@ -10,7 +10,7 @@ async execute({ name, category, price, description, ingredients }) {
 
   ingredients = ingredients ?? [];
 
-  const dish_id = await this.dishRepository.createDish({
+  const dish_id = await this.dishesRepository.createDish({
     name,
     category,
     price,
@@ -23,7 +23,7 @@ async execute({ name, category, price, description, ingredients }) {
       dish_id,
     }));
 
-    await this.dishRepository.createDishIngredients(ingredientsInsert);
+    await this.dishesRepository.createDishIngredients(ingredientsInsert);
   }
 
   return { dish_id };
