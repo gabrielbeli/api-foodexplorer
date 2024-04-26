@@ -3,7 +3,7 @@ exports.up = (knex) =>
     table.increments('id').primary();
 
     table
-      .integer('dish_id')
+      .integer('user_id')
       .references('id')
       .inTable('dishes')
       .onDelete('CASCADE')
